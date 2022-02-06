@@ -1,6 +1,6 @@
 # Dishooks
 
-Dishooks is a super small Deno library used to post to Discord webhooks, created
+Dishooks is a super small (zero dependencies, not even `std`!) Deno library used to post to Discord webhooks, created
 so you don't have to use a large full-featured Discord library just to post to a
 webhook.
 
