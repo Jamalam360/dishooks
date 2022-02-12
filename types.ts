@@ -7,7 +7,7 @@ export interface WebhookResponse {
 export interface WebhookMessage {
   content?: string;
   username?: string;
-  avartar_url?: string;
+  avatar_url?: string;
   tts?: boolean;
   embeds?: Embed[];
   attachments?: Attachment[];
