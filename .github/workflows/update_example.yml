@@ -1,0 +1,24 @@
+name: Update README Example
+on: [push]
+
+jobs:
+  update-example:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: vx.x.x
+      - name: Update Example
+        run: |
+          deno run --allow-read --allow-write ./.github/exampleUpdater.ts
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions"
+          git commit --allow-empty -m "[Bot] Update README" -a
+      - name: Push Example Changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
