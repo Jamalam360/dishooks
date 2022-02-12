@@ -32,3 +32,10 @@ method:
 ```ts
 ${EXAMPLE_NO_VALIDATE}
 ```
+
+Dishooks can also truncate content to the maximum length if it is larger than
+the maximum size:
+
+```ts
+${EXAMPLE_TRUNCATE}
+```
