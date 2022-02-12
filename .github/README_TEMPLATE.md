@@ -37,5 +37,5 @@ Dishooks can also truncate content to the maximum length if it is larger than
 the maximum size:
 
 ```ts
-${EXAMPLE_TRUNCATE}
+${EXAMPLE_TRUNCATION}
 ```
