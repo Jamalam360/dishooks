@@ -8,6 +8,9 @@ export async function post(
   truncationString = "...",
 ): Promise<WebhookResponse> {
   if (validate || truncate) {
+    let characterCount = 0;
+
+    characterCount += body.username?.length ?? 0;
     if (body.username && body.username.length > 80) {
       if (truncate) {
         body.username =
@@ -22,6 +25,7 @@ export async function post(
       }
     }
 
+    characterCount += body.content?.length ?? 0;
     if (body.content && body.content.length > 2000) {
       if (truncate) {
         body.content =
@@ -50,6 +54,7 @@ export async function post(
 
     if (body.embeds) {
       body.embeds.forEach((element) => {
+        characterCount += element.title?.length ?? 0;
         if (element.title && element.title.length > 256) {
           if (truncate) {
             element.title =
@@ -64,20 +69,22 @@ export async function post(
           }
         }
 
-        if (element.description && element.description.length > 2048) {
+        characterCount += element.description?.length ?? 0;
+        if (element.description && element.description.length > 4096) {
           if (truncate) {
             element.description =
-              element.description.substring(0, 2048 - truncationString.length) +
+              element.description.substring(0, 4096 - truncationString.length) +
               truncationString;
           } else {
             return {
               success: false,
               status: 400,
-              message: "Embed description too long (max 2048)",
+              message: "Embed description too long (max 4096)",
             };
           }
         }
 
+        characterCount += element.author?.name.length ?? 0;
         if (element.author && element.author.name.length > 256) {
           if (truncate) {
             element.author.name =
@@ -105,6 +112,7 @@ export async function post(
         }
 
         element.fields?.forEach((field) => {
+          characterCount += field.name.length;
           if (field.name.length > 256) {
             return {
               success: false,
@@ -113,6 +121,7 @@ export async function post(
             };
           }
 
+          characterCount += field.value.length;
           if (field.value.length > 1024) {
             if (truncate) {
               field.value =
@@ -128,6 +137,7 @@ export async function post(
           }
         });
 
+        characterCount += element.footer?.text.length ?? 0;
         if (element.footer && element.footer.text.length > 2048) {
           if (truncate) {
             element.footer.text =
@@ -142,6 +152,14 @@ export async function post(
           }
         }
       });
+
+      if (characterCount > 6000) {
+        return {
+          success: false,
+          status: 400,
+          message: "Message too long (max 6000)",
+        };
+      }
     }
   }
 
