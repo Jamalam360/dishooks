@@ -1,4 +1,4 @@
-import { post } from "https://deno.land/x/dishooks@v1.0.4/mod.ts";
+import { post } from "https://deno.land/x/dishooks@v1.1.0/mod.ts";
 
 await post(
   "YOUR_URL",
