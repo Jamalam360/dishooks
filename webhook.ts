@@ -1,5 +1,14 @@
 import { WebhookMessage, WebhookResponse } from "./mod.ts";
 
+/**
+ * Posts a message to a Discord webhook.
+ * @param url The webhook URL.
+ * @param body The message to post.
+ * @param validate Whether to validate the input (e.g. check for over allowed length).
+ * @param truncate Whether to truncate the input if it is too long to send.
+ * @param truncationString The string to truncate with.
+ * @returns A response with information about the success of the message.
+ */
 export async function post(
   url: string,
   body: WebhookMessage,
