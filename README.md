@@ -7,7 +7,7 @@ webhook.
 Example:
 
 ```ts
-import { post } from "https://deno.land/x/dishooks@v1.0.4/mod.ts";
+import { post } from "https://deno.land/x/dishooks@v1.1.0/mod.ts";
 
 await post(
   "YOUR_URL",
@@ -38,7 +38,7 @@ can disable this by setting `validate` to `false` when you call the `post`
 method:
 
 ```ts
-import { post } from "https://deno.land/x/dishooks@v1.0.4/mod.ts";
+import { post } from "https://deno.land/x/dishooks@v1.1.0/mod.ts";
 
 await post(
   "YOUR_URL",
@@ -54,7 +54,7 @@ Dishooks can also truncate content to the maximum length if it is larger than
 the maximum size:
 
 ```ts
-import { post } from "https://deno.land/x/dishooks@v1.0.4/mod.ts";
+import { post } from "https://deno.land/x/dishooks@v1.1.0/mod.ts";
 
 await post(
   "YOUR_URL",
